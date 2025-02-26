@@ -1,0 +1,14 @@
+mat-toolbar {
+  justify-content: space-between;
+  background-color: lightblue;
+}
+
+.navbar-name-and-pic {
+  display: flex;
+  align-items: center;
+}
+
+.profile-img-navbar {
+  border-radius: 100%;
+  margin-right: 0.7rem;
+}

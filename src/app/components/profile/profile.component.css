@@ -1,0 +1,30 @@
+.profile-image img {
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile-image {
+  position: relative;
+}
+
+.profile-image button {
+  border-radius: 100%;
+  position: absolute;
+  bottom: 0px;
+  right: 32%;
+}
+
+.profile-form-container {
+  /* background-color: red; */
+  margin-top: 2rem;
+}
+
+.form-container {
+  max-width: 400px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+}
