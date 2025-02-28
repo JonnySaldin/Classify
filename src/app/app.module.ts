@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -26,6 +26,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { MatMenuModule } from '@angular/material/menu';
 import { ProfileComponent } from './components/profile/profile.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { SidePanelComponent } from './components/side-panel/side-panel.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     SignUpComponent,
     HomeComponent,
     ProfileComponent,
+    SidePanelComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    FormsModule,
     AppRoutingModule,
     MatMenuModule,
     ToastrModule.forRoot(),

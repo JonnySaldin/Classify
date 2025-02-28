@@ -1,5 +1,6 @@
 mat-toolbar {
   justify-content: space-between;
+  height: 6%;
   background-color: lightblue;
 }
 

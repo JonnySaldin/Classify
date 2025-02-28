@@ -1,0 +1,75 @@
+.class-buttons-container {
+  width: 80%;
+  height: fit-content;
+  /* background-color: pink; */
+}
+
+.class-button {
+  display: flex;
+  padding: 0;
+  outline: none;
+  border: none;
+  height: 3rem;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 0.7rem;
+}
+.class-button:hover {
+  cursor: pointer;
+}
+
+.class-button-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 75%;
+  /* background-color: green; */
+}
+.class-button-title-container p {
+  margin: 0 0 0 1rem;
+  padding: 0;
+}
+
+.class-button-trash-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 25%;
+  /* background-color: red; */
+}
+
+.add-new-class-btn {
+  padding: 0;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(255, 208, 0);
+  height: 2.2rem;
+  width: 100%;
+  margin-top: 0.7rem;
+}
+.add-new-class-btn:hover {
+  cursor: pointer;
+}
+
+/* add new class modal styles */
+.add-class-modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.363);
+  z-index: 1000;
+}
+
+.add-class-modal {
+  width: 40%;
+  height: 40%;
+  background-color: white;
+}

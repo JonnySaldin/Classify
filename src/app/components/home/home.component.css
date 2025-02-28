@@ -1,0 +1,29 @@
+app-side-panel {
+  display: flex;
+  justify-content: center;
+  background-color: lightcoral;
+  width: 15%;
+  height: 100%;
+}
+
+.home-container {
+  height: 94%;
+  width: 100%;
+  background-color: lightyellow;
+  display: flex;
+}
+
+.class-title-container {
+  display: flex;
+  align-items: center;
+  /* background-color: lightsalmon; */
+  max-width: 50%;
+  height: 4rem;
+}
+
+.class-title p {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  margin-left: 2rem;
+}
