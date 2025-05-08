@@ -1,6 +1,10 @@
-<mat-toolbar>
-  Classify
-
+<mat-toolbar *ngIf="!(user$ | async)">
+  <img
+    class="navbar-icon"
+    width="115"
+    [src]="'/assets/classify-logo-official.svg'"
+    alt="navbar classify logo"
+  />
   <ng-container *ngIf="user$ | async as user; else loginButton">
     <button mat-button [matMenuTriggerFor]="userMenu">
       <div class="navbar-name-and-pic">
@@ -13,8 +17,6 @@
         />
         {{ user.displayName }}
       </div>
-
-      <mat-icon>expand_more</mat-icon>
     </button>
   </ng-container>
 

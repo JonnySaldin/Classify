@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { UsersService } from '../../services/users.service';
 
 interface SidePanelButton {
   type: string;
@@ -18,10 +21,17 @@ export class SidePanelComponent implements OnInit {
   userId: string | null = null;
   showAddClassModal = false;
 
+  user$;
+
   constructor(
     private dataService: DataService,
-    private authService: AuthenticationService
-  ) {}
+    private authService: AuthenticationService,
+    private usersService: UsersService,
+    private router: Router,
+    private toast: ToastrService
+  ) {
+    this.user$ = this.usersService.currentUserProfile$;
+  }
 
   ngOnInit(): void {
     // Subscribe to the buttons observable to get the buttons list
@@ -68,5 +78,28 @@ export class SidePanelComponent implements OnInit {
 
   closeAddClassModal() {
     this.showAddClassModal = false;
+  }
+
+  openClassMenu(event: MouseEvent): void {
+    event.stopPropagation();
+  }
+
+  // user logout method
+  logout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.toast.warning('You are logged out', 'Log out complete', {
+          timeOut: 2000,
+          positionClass: 'toast-bottom-right',
+        });
+        this.router.navigate(['']);
+      },
+      error: () => {
+        this.toast.error('Log out failed', 'Error', {
+          timeOut: 2000,
+          positionClass: 'toast-bottom-right',
+        });
+      },
+    });
   }
 }

@@ -1,48 +1,167 @@
-<!-- Input field to add new buttons -->
+<!-- Display user classes -->
+<div class="side-panel-content-wrapper">
+  <!-- <img class="icon" src="assets\ClassifyLogoFinal.svg" alt="" /> -->
+  <div class="class-buttons-container">
+    <div class="side-classes-label">
+      <p>Your Classes</p>
+    </div>
+    <div class="class-btns-section">
+      <div *ngFor="let button of buttons">
+        <button class="class-button" (click)="selectData(button.type)">
+          <div class="class-button-title-container">
+            <p>{{ button.label }}</p>
+          </div>
+          <div class="class-button-trash-container">
+            <svg
+              (click)="openClassMenu($event)"
+              class="class-dots"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              width="17"
+              height="17"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"
+              />
+            </svg>
 
-<!-- Display dynamically generated buttons -->
-<div class="class-buttons-container">
-  <div *ngFor="let button of buttons">
-    <button class="class-button" (click)="selectData(button.type)">
-      <div class="class-button-title-container">
-        <p>{{ button.label }}</p>
+            <!-- This is the delete "button" that is for deleting classes.  -->
+            <!-- <svg
+              (click)="removeButton(button.type)"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              height="16"
+              width="16"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+              />
+            </svg> -->
+          </div>
+        </button>
       </div>
-      <div class="class-button-trash-container">
+    </div>
+    <div class="add-class-btn-cntr">
+      <button class="add-new-class-btn" (click)="displayAddClassModal()">
         <svg
-          (click)="removeButton(button.type)"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          width="17"
+          height="17"
+          stroke="currentColor"
+          class="add-class-btn-icon"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z"
+          />
+        </svg>
+
+        Add class
+      </button>
+    </div>
+    <div class="special-links-wrapper">
+      <div class="special-links-container">
+        <p class="special-links-text">Priority list</p>
+        <p class="special-links-text">Project list</p>
+        <p class="special-links-text">Stats</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="side-panel-bottom-section">
+    <div class="user-account-btn-container">
+      <ng-container *ngIf="user$ | async as user; else loginButton">
+        <button
+          class="usr-act-btn"
+          mat-button
+          disableRipple
+          [matMenuTriggerFor]="userMenu"
+        >
+          <div class="sidebar-btn">
+            <img
+              class="profile-img-sidebar"
+              width="45"
+              height="45"
+              [src]="user.photoURL ?? '/assets/image-placeholder.png'"
+              alt="navbar profile picture"
+            />
+            <div class="sidebar-act-name">
+              {{ user.displayName }}
+            </div>
+          </div>
+        </button>
+      </ng-container>
+
+      <ng-template #loginButton>
+        <button mat-button routerLink="login">
+          <mat-icon>login</mat-icon>
+          Login
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<!-- menu that pops up when user account btn is clicked -->
+<mat-menu #userMenu>
+  <button mat-menu-item routerLink="/profile">Profile</button>
+  <button mat-menu-item (click)="logout()">Logout</button>
+</mat-menu>
+
+<!-- add new class modal -->
+<div class="add-class-modal-container" *ngIf="showAddClassModal">
+  <div class="add-class-modal">
+    <div class="add-class-modal-title">
+      <p>Add Class</p>
+      <div class="add-class-modal-x-cntr">
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="size-6"
-          height="16"
-          width="16"
+          class="add-class-modal-x"
+          height="19"
+          width="19"
+          (click)="closeAddClassModal()"
         >
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+            d="M6 18 18 6M6 6l12 12"
           />
         </svg>
       </div>
-    </button>
-  </div>
-  <button class="add-new-class-btn" (click)="displayAddClassModal()">
-    Add new class
-  </button>
-</div>
-
-<!-- add new class modal -->
-<div class="add-class-modal-container" *ngIf="showAddClassModal">
-  <div class="add-class-modal">
-    <input
-      type="text"
-      [(ngModel)]="newButtonLabel"
-      placeholder="New class name"
-    />
-    <button (click)="addNewButton(); closeAddClassModal()">Add</button>
-
-    <button (click)="closeAddClassModal()">close</button>
+    </div>
+    <div class="add-class-modal-input-container">
+      <input
+        class="add-class-input"
+        type="text"
+        [(ngModel)]="newButtonLabel"
+        placeholder="Class name"
+      />
+    </div>
+    <div class="add-class-modal-btn-cntr">
+      <button
+        class="add-class-modal-btn"
+        (click)="addNewButton(); closeAddClassModal()"
+      >
+        Add
+      </button>
+    </div>
   </div>
 </div>

@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit {
   user$: Observable<any>;
   selectedData: DynamicHomeData | null = null;
   selectedButtonLabel: string | null = null;
+  todosLength = 0;
+  projectsLength = 0;
 
   constructor(
     private authService: AuthenticationService,
@@ -25,6 +27,14 @@ export class HomeComponent implements OnInit {
     this.dataService.selectedData$.subscribe((data) => {
       console.log('Home Component - Selected Data:', data); // Logging the data to see
       this.selectedData = data;
+    });
+
+    this.dataService.todos$.subscribe((todos) => {
+      this.todosLength = todos.length;
+    });
+
+    this.dataService.projects$.subscribe((projects) => {
+      this.projectsLength = projects.length;
     });
   }
 }

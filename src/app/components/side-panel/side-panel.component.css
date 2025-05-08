@@ -1,21 +1,53 @@
+.side-panel-content-wrapper {
+  width: 86%;
+  /* background-color: red; */
+}
+
 .class-buttons-container {
-  width: 80%;
-  height: fit-content;
+  margin-top: 1rem;
   /* background-color: pink; */
+  height: 78%;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+}
+
+.side-classes-label {
+  /* background-color: orange; */
+  margin-left: 1rem;
+  margin-bottom: -0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.class-btns-section {
+  /* background-color: black; */
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  max-height: 22.2rem;
+  margin-top: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .class-button {
   display: flex;
-  padding: 0;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding: 0.2rem;
   outline: none;
   border: none;
   height: 3rem;
   width: 100%;
-  border-radius: 10px;
-  margin-top: 0.7rem;
+  border-radius: 7px;
+  margin-bottom: 0.7rem;
+  transition: ease-in-out 0.15s;
 }
 .class-button:hover {
   cursor: pointer;
+  transform: scale(1.02);
+}
+.class-button:active {
+  transform: scale(0.97);
 }
 
 .class-button-title-container {
@@ -28,7 +60,18 @@
 }
 .class-button-title-container p {
   margin: 0 0 0 1rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
   padding: 0;
+}
+
+.class-dots {
+  padding: 0.3rem;
+  border-radius: 100%;
+  transition: ease-in-out 0.2s;
+}
+.class-dots:hover {
+  background-color: rgb(231, 231, 231);
 }
 
 .class-button-trash-container {
@@ -40,18 +83,46 @@
   /* background-color: red; */
 }
 
+.add-class-btn-cntr {
+  /* background-color: red; */
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(243, 242, 239) 100%
+  );
+  max-width: 100%;
+  height: 4rem;
+  margin-top: -1.8rem;
+  padding: 0rem 1rem 0rem 1rem;
+}
+
 .add-new-class-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
   outline: none;
   border: none;
-  border-radius: 10px;
-  background-color: rgb(255, 208, 0);
+  border-radius: 7px;
+  background-color: #fddd5c;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   height: 2.2rem;
   width: 100%;
-  margin-top: 0.7rem;
+  margin-top: 2rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  transition: ease-in-out 0.15s;
 }
 .add-new-class-btn:hover {
   cursor: pointer;
+  transform: scale(1.02);
+}
+.add-new-class-btn:active {
+  transform: scale(0.97);
+}
+
+.add-class-btn-icon {
+  margin-right: 0.3rem;
 }
 
 /* add new class modal styles */
@@ -64,12 +135,178 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.363);
+  background-color: rgba(0, 0, 0, 0.61);
   z-index: 1000;
 }
 
 .add-class-modal {
-  width: 40%;
-  height: 40%;
+  border-radius: 25px;
+  width: 30%;
+  height: 15%;
   background-color: white;
+  padding: 1.3rem 1.5rem 1.5rem 1.5rem;
+}
+
+.add-class-modal-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  /* background-color: yellow; */
+  height: 20%;
+}
+.add-class-modal-title p {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+.add-class-modal-x-cntr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  width: 2rem;
+
+  border-radius: 50%;
+  transition: ease-in-out 0.15s;
+}
+.add-class-modal-x-cntr:hover {
+  cursor: pointer;
+  background-color: #fddd5c83;
+}
+.add-class-modal-x-cntr:active {
+  transform: scale(0.8);
+}
+
+.add-class-modal-input-container {
+  width: 100%;
+  height: 35%;
+  display: flex;
+  align-items: flex-end;
+  /* background-color: rgb(176, 176, 121); */
+}
+
+.add-class-input {
+  width: 100%;
+  outline: none;
+  padding: 1rem 1rem 0.5rem 0.5rem;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.336);
+}
+.add-class-input::placeholder {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.603);
+}
+
+.add-class-modal-btn-cntr {
+  display: flex;
+  align-items: flex-end;
+  /* background-color: red; */
+  width: 100%;
+  height: 45%;
+}
+.add-class-modal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  outline: none;
+  border: none;
+  border-radius: 7px;
+  background-color: #fddd5c;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  height: 2.2rem;
+  width: 100%;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  transition: ease-in-out 0.15s;
+}
+.add-class-modal-btn:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+.add-class-modal-btn:active {
+  transform: scale(0.98);
+}
+
+.special-links-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 10rem;
+  /* background-color: tan; */
+}
+.special-links-container {
+  height: fit-content;
+  /* background-color: blue; */
+  width: 90%;
+  padding-top: 1rem;
+  border-top: 0.02rem solid rgba(128, 128, 128, 0.565);
+}
+
+.special-links-text {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin: 0 0 0 0.4rem;
+}
+.special-links-text:hover {
+  color: #e8b200;
+  cursor: pointer;
+}
+
+.side-panel-bottom-section {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 19%;
+  /* background-color: green; */
+  display: flex;
+  justify-content: center;
+}
+
+.user-account-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 6rem;
+  /* background-color: orange; */
+}
+
+.usr-act-btn {
+  display: flex;
+  justify-content: flex-start;
+  height: 0;
+  transition: ease-in-out 0.15s;
+  border-radius: 7px;
+}
+.usr-act-btn:hover {
+  transform: scale(1.03);
+  background-color: transparent;
+}
+
+.sidebar-btn {
+  display: flex;
+  align-items: center;
+}
+
+.profile-img-sidebar {
+  border-radius: 100%;
+  margin-right: 0.8rem;
+}
+
+.sidebar-act-name {
+  font-family: "Quicksand", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: black;
+  border-radius: 5px;
 }

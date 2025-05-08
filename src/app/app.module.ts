@@ -27,6 +27,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ProfileComponent } from './components/profile/profile.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { SidePanelComponent } from './components/side-panel/side-panel.component';
+import { TodosComponent } from './components/todos/todos.component';
+import { ProjectsComponent } from './components/projects/projects.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { SidePanelComponent } from './components/side-panel/side-panel.component
     HomeComponent,
     ProfileComponent,
     SidePanelComponent,
+    TodosComponent,
+    ProjectsComponent,
   ],
   imports: [
     BrowserModule,

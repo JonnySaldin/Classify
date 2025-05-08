@@ -1,15 +1,12 @@
 mat-toolbar {
   justify-content: space-between;
   height: 6%;
-  background-color: lightblue;
+  background-color: lightyellow;
 }
 
-.navbar-name-and-pic {
-  display: flex;
-  align-items: center;
-}
-
-.profile-img-navbar {
-  border-radius: 100%;
-  margin-right: 0.7rem;
+.navbar-icon {
+  margin: 0.8rem 0 0 0;
+  /* border-radius: 100%; */
+  /* background-color: #ffee8c; */
+  /* padding: 4px; */
 }

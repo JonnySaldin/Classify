@@ -1,16 +1,32 @@
 <div class="home-container">
   <app-side-panel></app-side-panel>
-  <!-- <h4 *ngIf="user$ | async as user">
-    Welcome to Classify, {{ user.displayName }}!
-  </h4> -->
 
-  <div class="class-title-container">
-    <div *ngIf="selectedData" class="class-title">
-      <p>{{ selectedData["message"] }}</p>
+  <div class="home-content-wrapper">
+    <div class="left-side-home">
+      <div class="wrapper">
+        <div class="class-title-container">
+          <div *ngIf="selectedData" class="class-title">
+            <p>{{ selectedData["message"] }}</p>
+          </div>
+        </div>
+        <div class="class-subtitle">
+          {{ todosLength }} todos and {{ projectsLength }} projects incomplete
+        </div>
+
+        <!-- Add the TodosComponent and pass the selected button -->
+        <div class="todos-container">
+          <app-todos
+            *ngIf="selectedData"
+            [selectedButton]="selectedData['type']"
+          ></app-todos>
+        </div>
+      </div>
     </div>
-
-    <div *ngIf="!selectedData">
-      <p>Loading data...</p>
+    <div class="right-side-home">
+      <app-projects
+        *ngIf="selectedData"
+        [selectedButton]="selectedData['type']"
+      ></app-projects>
     </div>
   </div>
 </div>

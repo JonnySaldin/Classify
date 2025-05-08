@@ -7,9 +7,15 @@ import {
   setDoc,
   deleteDoc,
   onSnapshot,
+  addDoc,
+  collectionData,
 } from '@angular/fire/firestore';
 import { DynamicHomeData } from '../models/dynamic-home-data';
 import { AuthenticationService } from './authentication.service';
+import { TodoItem } from '../models/todo-item-model';
+import { ProjectItem } from '../models/project-model';
+import { ProjectItemItem } from '../models/project-item-model';
+import { Observable } from 'rxjs';
 
 interface SidePanelButton {
   type: string;
@@ -31,7 +37,17 @@ export class DataService {
   private buttonsSubject = new BehaviorSubject<SidePanelButton[]>([]);
   buttons$ = this.buttonsSubject.asObservable();
 
+  private todosSubject = new BehaviorSubject<TodoItem[]>([]);
+  todos$ = this.todosSubject.asObservable();
+
+  private projectsSubject = new BehaviorSubject<ProjectItem[]>([]);
+  projects$ = this.projectsSubject.asObservable();
+
+  private projectItemsSubject = new BehaviorSubject<ProjectItemItem[]>([]);
+  projectItems$ = this.projectItemsSubject.asObservable();
+
   private userId: string | null = null;
+  private selectedButton: string | null = null;
 
   constructor(
     private firestore: Firestore,
@@ -46,7 +62,12 @@ export class DataService {
         this.userId = null;
         this.buttonsSubject.next([]); // Clear buttons when user logs out
         this.selectedDataSubject.next(null); // Clear selected data
+        this.todosSubject.next([]);
+        this.projectsSubject.next([]);
       }
+    });
+    this.authService.currentUser$.subscribe((user) => {
+      this.userId = user ? user.uid : null;
     });
   }
 
@@ -95,8 +116,6 @@ export class DataService {
   // When a button is selected, set the selectedButton's value
   async selectButton(label: string) {
     if (!this.userId) return;
-
-    console.log(`Selected Button: ${label}`); // Debugging log
 
     // Store the selected button in Firestore
     const selectedButtonDocRef = doc(
@@ -160,5 +179,130 @@ export class DataService {
         this.selectedDataSubject.next(defaultData);
       }
     });
+  }
+
+  // ------- added for todos component. -----
+
+  loadTodos(buttonType: string) {
+    if (!this.userId) return;
+
+    const todosCollection = collection(
+      this.firestore,
+      `users/${this.userId}/todos/${buttonType}/items`
+    );
+
+    onSnapshot(todosCollection, (snapshot) => {
+      const todos = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as TodoItem[];
+
+      console.log('Updated Todos:', todos); // Debugging
+      this.todosSubject.next(todos);
+    });
+  }
+
+  async addTodo(buttonType: string, todo: TodoItem) {
+    if (!this.userId) return;
+
+    const todosCollection = collection(
+      this.firestore,
+      `users/${this.userId}/todos/${buttonType}/items`
+    );
+    await addDoc(todosCollection, todo);
+  }
+
+  async removeTodo(buttonType: string, todoId: string) {
+    if (!this.userId) return;
+
+    const todoDoc = doc(
+      this.firestore,
+      `users/${this.userId}/todos/${buttonType}/items/${todoId}`
+    );
+    await deleteDoc(todoDoc);
+  }
+
+  // ---------- added for projects -------------
+
+  loadProjects(buttonType: string) {
+    if (!this.userId) return;
+
+    const projectsCollection = collection(
+      this.firestore,
+      `users/${this.userId}/projects/${buttonType}/items`
+    );
+
+    onSnapshot(projectsCollection, (snapshot) => {
+      const projects = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as ProjectItem[];
+
+      console.log('Updated Projects:', projects); // Debugging
+      this.projectsSubject.next(projects);
+    });
+  }
+
+  async addProject(buttonType: string, todo: ProjectItem) {
+    if (!this.userId) return;
+
+    const projectsCollection = collection(
+      this.firestore,
+      `users/${this.userId}/projects/${buttonType}/items`
+    );
+    await addDoc(projectsCollection, todo);
+  }
+
+  async removeProject(buttonType: string, projectid: string) {
+    if (!this.userId) return;
+
+    const todoDoc = doc(
+      this.firestore,
+      `users/${this.userId}/projects/${buttonType}/items/${projectid}`
+    );
+    await deleteDoc(todoDoc);
+  }
+
+  // ---------- added for project items -------------
+
+  loadProjectItems(
+    selectedButton: string,
+    projectId: string
+  ): Observable<ProjectItemItem[]> {
+    const itemsRef = collection(
+      this.firestore,
+      `users/${this.userId}/projects/${selectedButton}/items/${projectId}/subitems`
+    );
+    return collectionData(itemsRef, { idField: 'id' }) as Observable<
+      ProjectItemItem[]
+    >;
+  }
+
+  async addProjectItem(
+    buttonType: string,
+    projectId: string,
+    subitem: ProjectItemItem
+  ) {
+    if (!this.userId) return;
+
+    const projectItemsCollection = collection(
+      this.firestore,
+      `users/${this.userId}/projects/${buttonType}/items/${projectId}/subitems`
+    );
+    await addDoc(projectItemsCollection, subitem);
+  }
+
+  async removeProjectItem(
+    buttonType: string,
+    projectId: string,
+    subitemId: string
+  ) {
+    if (!this.userId) return;
+
+    const subitemDoc = doc(
+      this.firestore,
+      `users/${this.userId}/projects/${buttonType}/items/${projectId}/subitems/${subitemId}`
+    );
+    await deleteDoc(subitemDoc);
   }
 }

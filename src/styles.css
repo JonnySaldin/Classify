@@ -38,3 +38,16 @@ body {
 .text-center {
   text-align: center;
 }
+
+.navbar-name-and-pic {
+  display: flex;
+  align-items: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  color: black;
+}
+
+.profile-img-navbar {
+  border-radius: 100%;
+  margin-right: 0.5rem;
+}

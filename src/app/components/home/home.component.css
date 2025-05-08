@@ -1,29 +1,84 @@
 app-side-panel {
   display: flex;
   justify-content: center;
-  background-color: lightcoral;
-  width: 15%;
+  background-color: rgb(243, 242, 239);
+  width: 18%;
   height: 100%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .home-container {
-  height: 94%;
+  height: 100%;
   width: 100%;
-  background-color: lightyellow;
+  /* background-color: rgb(225, 225, 225); */
+  background-color: rgb(232, 232, 232);
+  /* background-color: rgba(235, 224, 162, 0.298); */
   display: flex;
 }
 
 .class-title-container {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   /* background-color: lightsalmon; */
-  max-width: 50%;
-  height: 4rem;
+  max-width: 100%;
+  margin-top: -1.6rem;
 }
 
 .class-title p {
-  margin: 0;
   padding: 0;
-  font-size: 20px;
-  margin-left: 2rem;
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+}
+
+.class-subtitle {
+  display: flex;
+  align-items: flex-end;
+  height: 2.1rem;
+  font-size: 0.85rem;
+  /* background-color: pink; */
+  margin-left: 0.2rem;
+}
+
+.home-content-wrapper {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  width: 82%;
+  height: 91%;
+  /* background-color: red; */
+}
+
+.left-side-home {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 30%;
+  /* background-color: rgb(247, 244, 207); */
+  border-radius: 15px;
+  margin-top: 1rem;
+}
+
+.wrapper {
+  /* background-color: green; */
+  width: 80%;
+}
+
+.right-side-home {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+  width: 35%;
+  margin-right: 2rem;
+  background-color: rgb(243, 242, 239);
+  border-radius: 15px;
+}
+
+app-projects {
+  width: 100%;
+  /* background-color: blue; */
 }
