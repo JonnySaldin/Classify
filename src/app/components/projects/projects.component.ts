@@ -19,7 +19,7 @@ export class ProjectsComponent implements OnInit {
   isProjectInputExpanded = false;
   newProjectText: string = '';
 
-  isProjectItemInputExpanded = false;
+  projectItemInputExpanded: { [projectId: string]: boolean } = {};
   newProjectItemText: string = '';
 
   constructor(private dataService: DataService) {
@@ -98,7 +98,8 @@ export class ProjectsComponent implements OnInit {
     this.isProjectInputExpanded = !this.isProjectInputExpanded;
   }
 
-  toggleProjectItemInputExpand() {
-    this.isProjectItemInputExpanded = !this.isProjectItemInputExpanded;
+  toggleProjectItemInputExpand(projectId: string) {
+    this.projectItemInputExpanded[projectId] =
+      !this.projectItemInputExpanded[projectId];
   }
 }

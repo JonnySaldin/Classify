@@ -13,6 +13,9 @@
 }
 
 .projects-input {
+  font-size: 0.8rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
   width: 0;
   padding: 0;
   border: none;
@@ -133,20 +136,6 @@
   justify-content: space-between;
 }
 
-.project-title-wrapper {
-  /* background-color: blue; */
-  width: fit-content;
-  transition: ease-in-out 0.1s;
-}
-
-.project-title-wrapper.expanded {
-  /* background-color: red; */
-  width: 7.5rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .project-title {
   display: flex;
   align-items: center;
@@ -154,18 +143,36 @@
   font-weight: 300;
   font-size: 1.1rem;
   border-radius: 25px;
-  width: fit-content;
-  transition: ease-in-out 0.2s;
+  max-width: 80%;
+  transition: ease 0.2s;
   white-space: nowrap;
   /* background-color: red; */
 }
 .project-title.expanded {
-  width: fit-content;
   background-color: rgba(128, 128, 128, 0.123);
   /* box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px; */
   padding: 0.2rem 0.4rem 0.2rem 0.8rem;
   cursor: pointer;
   white-space: nowrap;
+}
+
+.project-title-wrapper {
+  will-change: max-width;
+  display: flex;
+  width: auto;
+  max-width: 100%;
+  transition: all 0.2s ease;
+  /* background-color: rgba(0, 0, 255, 0.116); */
+}
+.project-title-wrapper.expanded {
+  max-width: 37%;
+}
+
+.elipsis-wrapper {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 .plus-for-project-items {
@@ -175,7 +182,7 @@
   width: 0;
   height: 0;
   overflow: hidden;
-  transition: ease-in-out 0.2s;
+  transition: ease 0.2s;
 }
 .plus-for-project-items.expanded {
   margin-left: 0.4rem;
@@ -207,6 +214,10 @@
 }
 
 .project-item-input {
+  font-size: 0.75rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  will-change: width, padding;
   width: 0;
   padding: 0;
   border: none;
@@ -214,7 +225,7 @@
   border-radius: 25px;
   margin: 0;
   overflow: hidden;
-  transition: width 0.3s ease, padding 0.3s ease;
+  transition: all 0.2s ease;
 }
 .project-item-input::placeholder {
   font-size: 0.75rem;
@@ -252,13 +263,16 @@
   background-color: #9aec9e;
   box-shadow: rgba(99, 99, 99, 0.274) 0px 2px 8px 0px;
   margin-left: 0.5rem;
-  transition: transform ease-in-out 0.08s;
+  transition: transform ease 0.08s;
   opacity: 1;
   transform: scale(1);
 }
 
 .confirm-project-item:hover {
   cursor: pointer;
+}
+.confirm-project-item:active {
+  transform: scale(0.88);
 }
 
 .projects-menu-icon {

@@ -58,25 +58,27 @@
       <div class="project-title-container">
         <div
           class="project-title"
-          (click)="toggleProjectItemInputExpand()"
-          [class.expanded]="isProjectItemInputExpanded"
+          (click)="toggleProjectItemInputExpand(project.id!)"
+          [class.expanded]="projectItemInputExpanded[project.id!]"
         >
           <div
             class="project-title-wrapper"
-            [class.expanded]="isProjectItemInputExpanded"
+            [class.expanded]="projectItemInputExpanded[project.id!]"
           >
-            {{ project.text }}
+            <div class="elipsis-wrapper">
+              {{ project.text }}
+            </div>
           </div>
           <input
             class="project-item-input"
-            [class.expanded]="isProjectItemInputExpanded"
+            [class.expanded]="projectItemInputExpanded[project.id!]"
             [(ngModel)]="newProjectItemText"
             onclick="event.stopPropagation()"
             placeholder="Add an item"
           />
           <div
             class="confirm-project-item"
-            [class.expanded]="isProjectItemInputExpanded"
+            [class.expanded]="projectItemInputExpanded[project.id!]"
           >
             <svg
               (click)="
@@ -102,7 +104,7 @@
           </div>
           <div
             class="plus-for-project-items"
-            [class.expanded]="isProjectItemInputExpanded"
+            [class.expanded]="projectItemInputExpanded[project.id!]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

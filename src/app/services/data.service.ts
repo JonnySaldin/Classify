@@ -305,4 +305,18 @@ export class DataService {
     );
     await deleteDoc(subitemDoc);
   }
+
+  async updateTodo(
+    buttonType: string,
+    todoId: string,
+    updatedFields: Partial<TodoItem>
+  ) {
+    if (!this.userId) return;
+
+    const todoDoc = doc(
+      this.firestore,
+      `users/${this.userId}/todos/${buttonType}/items/${todoId}`
+    );
+    await setDoc(todoDoc, updatedFields, { merge: true });
+  }
 }

@@ -15,6 +15,8 @@ export class TodosComponent implements OnInit {
   isTodoInputExpanded = false;
   newTodoText: string = '';
 
+  itemIsChecked = false;
+
   constructor(private dataService: DataService) {
     this.todos$ = this.dataService.todos$;
   }
@@ -46,5 +48,14 @@ export class TodosComponent implements OnInit {
 
   toggleInputExpand() {
     this.isTodoInputExpanded = !this.isTodoInputExpanded;
+  }
+
+  toggleItemCheck(todo: TodoItem) {
+    if (this.selectedButton && todo.id) {
+      todo.checked = !todo.checked;
+      this.dataService.updateTodo(this.selectedButton, todo.id, {
+        checked: todo.checked,
+      });
+    }
   }
 }
